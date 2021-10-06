@@ -167,4 +167,24 @@ for(i in 1:10){
   print(i)
 }
 ```
+Example: set up
+```{r}
+x <- 1:10
+x+1
+```
+Predefine output at the size it should be at teh end - helps with computing time, important for large datasets
+```{r}
+out <- integer(length(x)) # could also include length = length(x)
+for(i in x){
+  out[i] <- i + 1
+}
+out
+```
+While loops - not commonly used in R 
+```{r}
+while(true){
+  do this
+}
+```
+
 
