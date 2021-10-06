@@ -1,0 +1,170 @@
+---
+title: "Fall_2021_R_workshopWHOI"
+author: "Anya Brown"
+date: "10/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+coat <- c("calico","black","tabby")
+weight <- as.numeric(c(2.1, 5.0, 3.2))
+like_string <- c(1,0,1)
+
+cats <- cbind(coat, weight, like_string)
+cats <- as.data.frame(cats)
+```
+
+
+```{r}
+cats$coat <- as.factor(cats$coat)
+cats$weight <- as.numeric(as.character(cats$weight))
+cats$like_string <- as.integer(cats$like_string)
+cats$coat_car <- as.character(cats$coat)
+#convert column to character to change something
+cats$coat_car[2] <- "orange"
+```
+
+```{r}
+new_column <- c(1,2,3)
+cats_new <- cbind(cats, new_column)
+```
+
+```{r}
+cats_new_bigger <- rbind(cats_new, list("tabby",3.2, 1,3))
+```
+
+
+Subsetting data
+
+
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+
+```
+
+
+
+```{r}
+
+x <- c(a =5.4,b=6.2, c = 7.1, d = 4.8, e = 7.5)
+```
+
+Subset vector
+```{r}
+
+x1 <- x[1]
+xb <- x["b"]
+
+```
+Conditional subsetting
+
+Logical vector
+```{r}
+logicalsubset <- x[c(TRUE,FALSE, FALSE,TRUE,FALSE)]
+```
+subset based on values
+```{r}
+x == 6.2
+x[x==6.2]
+x[x<10]
+x[x<6]
+```
+Combining conditionals
+& = needs to be true for both conditions
+```{r}
+
+x[x<6 & x >5]
+
+```
+OR operator: |
+one thing needs to be true
+```{r}
+x[x<6 | x>5]
+
+```
+
+Challenge 2
+values in vector greater than 4, less than 7
+```{r}
+x[x>4 & x<7]
+```
+
+Challenge 3 - using the gapminder data
+```{r}
+gapminder <- read.csv("data/gapminder_data.csv", header = T)
+seAsia <- c("Myanmar","Thailand","Cambodia","Vietnam","Laos")
+```
+
+```{r}
+countries <- unique(gapminder$country)
+SEAsiacountries <- countries[countries == "Myanmar" | countries == "Thailand" | countries == "Cambodia" | countries == "Vietnam" | countries == "Laos"]
+```
+
+Usng %in% !!!
+```{r}
+countries %in%  seAsia
+
+SEgapminder <- gapminder[which(gapminder$country %in% seAsia),]
+
+```
+Practicing if then statements
+```{r}
+#if (exp){
+  do this if TRUE
+#}
+#else{
+#  do this if false
+#}
+  
+```
+
+Conditional statements in R - uses a single true/false...use ifelse if there are multiple rows
+```{r}
+x <- 3
+
+if(x > 10){
+"Yay!"  
+} else if (x > 5 & x < 10){
+  "Boo"
+} else {
+  "Low number"
+}
+
+```
+gapminder records from 2002
+```{r}
+nrow2002 <- nrow(gapminder[gapminder$year == 2002,])
+#test <- gapminder[gapminder$year == 2002,]
+test <- nrow2002 > 0
+if(test){
+  "2002!"
+}
+```
+alternate using all and any
+all = if everything in the result is one way, return a value
+any = if anything is true return that value
+```{r}
+
+test2 <- any(gapminder$year == 2002)
+
+if(test2){
+  "2002!"
+}
+
+```
+Iteration: FOR LOOPS!!!!
+```{r}
+#for(element in a set of values){
+ # do the stuff
+#}
+
+```
+
+example
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
